@@ -12,11 +12,19 @@ const getLocalizacion = async (direccion) => {
     // utilizar la instacia creada para recibir los datos
     let respuesta = await instacia.get()
     const data = respuesta.data.Results[0]
-    
-    return{
-       data
-    }   
+
+    if(respuesta.data.Results.length <=0){
+        throw(`No existen datos para esta direccion ${direccion}`)
+    }
+    return {
+        
+       nombre:data.name,
+       latitud:data.lat,
+       longitud:data.lon
+      
+    }
 }
 module.exports={
     getLocalizacion
 }
+
